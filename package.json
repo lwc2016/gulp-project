@@ -5,7 +5,10 @@
   "main": "main.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "gulp --gulpfile gulpfile.multi.js"
+    "browserify:dev": "gulp --gulpfile gulpfile.browserify.js",
+    "browserify:build": "gulp --gulpfile gulpfile.browserify.js build",
+    "browserify_multi:dev": "gulp --gulpfile gulpfile.browserify.multi.js",
+    "browserify_multi:build": "gulp --gulpfile gulpfile.browserify.multi.js build"
   },
   "keywords": [],
   "author": "",
