@@ -15,7 +15,7 @@ const b = browserify({
   entries: "./src/index.js",
   debug: true,   // debug: true 告知browserify在运行时同时生成sourcemap用于调试
   transform: ["babelify"]
-})
+});
 
 const bundle = function(){
   b.bundle()
