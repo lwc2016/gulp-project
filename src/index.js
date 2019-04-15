@@ -5,6 +5,7 @@ var c = 1;
 
 var obj = {a: a, Hello: Hello};
 
+
 console.log(obj);
 
 console.log("hello world@222");
