@@ -8,5 +8,5 @@ var obj = {a: a, Hello: Hello};
 console.log(obj);
 
 console.log("hello world@222");
-console.log("ooo112");
-console.log("ok1122");
+console.log("ooo11211");
+console.log("ok");
