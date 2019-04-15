@@ -10,57 +10,43 @@ const watchify = require("watchify");
 const babelify = require("babelify");
 const through = require("through2");
 const sourcemaps = require("gulp-sourcemaps");
+const gulpIf = require("gulp-if");
 // gulp-sourcemaps 生成sourcemaps
 const glob = require("glob");
 // 获取符合规则的文件
+const NODE_ENV = process.env.NODE_ENV || "development";
 
-const b = function(filename){
-  let b = browserify({
-    entries: filename,
-    debug: true,
-    transform: ["babelify"]
-  });
-  return b;
-};
-
-const bundleStream = function(filename){
-  var bundleStream = through();
-  // gulp希望任务能够返回一个stream，因此在这里创建以恶搞
-   bundleStream
-   .pipe(source(filename.replace("./src/", "")))
-   .pipe(buffer())
-   .pipe(sourcemaps.init())
-   .pipe(uglify())
-   .pipe(sourcemaps.write())
-   .pipe(gulp.dest("./dist"))
-   return bundleStream;
-};
-
-// 打包
-const build = (done)=>{
+// 打包js代码
+gulp.task("build", function(done){
   glob("./src/*.js", function(err, files){
-     files.forEach(filename=>{
-        let _b = b(filename);
-        _b.bundle().pipe(bundleStream(filename));
-     });
-  })
-  done();
-};
+    files.forEach(file=>{
+      let b = browserify({
+        entries: file,
+        debug: true,
+        transform: [babelify],
+        plugin: [NODE_ENV === "development" && watchify]
+      });
+      bundle();
 
-// 打包并监测文件变化
-const build_watching = (done)=>{
-  glob("./src/*.js", function(err, files){
-     files.forEach(filename=>{
-        let _b = b(filename);
-        _b.plugin(watchify).bundle().pipe(bundleStream(filename));
-        _b.on("update", function(){
-          _b.bundle().pipe(bundleStream(filename))
+      function bundle(){
+        b.bundle()
+         .pipe(source(file.replace("./src/", "")))
+         .pipe(buffer())
+         .pipe(sourcemaps.init())
+         .pipe(gulpIf(NODE_ENV === "production", uglify()))
+         .pipe(sourcemaps.write())
+         .pipe(gulp.dest("./dist"));
+      };
+
+      b.on("update", function(ids){
+        ids.forEach(v=>{
+          console.log("bundle changed file: " + v);
         });
-     });
-  })
+        bundle();
+      })
+    });
+  });
   done();
-};
+});
 
-
-gulp.task("build", build);
-gulp.task("default", build_watching);
+gulp.task("default", gulp.series("build"));

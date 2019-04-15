@@ -5,10 +5,10 @@
   "main": "main.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "browserify:dev": "gulp --gulpfile gulpfile.browserify.js",
-    "browserify:build": "gulp --gulpfile gulpfile.browserify.js build",
-    "browserify_multi:dev": "gulp --gulpfile gulpfile.browserify.multi.js",
-    "browserify_multi:build": "gulp --gulpfile gulpfile.browserify.multi.js build"
+    "browserify:dev": "NODE_ENV=development gulp --gulpfile gulpfile.browserify.js",
+    "browserify:build": "NODE_ENV=production gulp --gulpfile gulpfile.browserify.js build",
+    "browserify_multi:dev": "NODE_ENV=development gulp --gulpfile gulpfile.browserify.multi.js",
+    "browserify_multi:build": "NODE_ENV=production gulp --gulpfile gulpfile.browserify.multi.js build"
   },
   "keywords": [],
   "author": "",
@@ -20,6 +20,7 @@
     "browserify": "^16.2.3",
     "glob": "^7.1.3",
     "gulp": "^4.0.0",
+    "gulp-if": "^2.0.2",
     "gulp-sourcemaps": "^2.6.5",
     "gulp-uglify": "^3.0.2",
     "gulp-watchify": "^0.7.0",
