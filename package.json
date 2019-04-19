@@ -9,7 +9,7 @@
     "browserify_multi:dev": "gulp --gulpfile gulpfile.browserify.multi.js",
     "browserify_multi:build": "gulp --gulpfile gulpfile.browserify.multi.js build",
     "browserSync:dev": "NODE_ENV=development gulp --gulpfile gulpfile.browserSync.js",
-    "browserSync:prod": "NODE_ENV=production gulp prod --gulpfile gulpfile.browserSync.js"
+    "browserSync:prod": "NODE_ENV=production gulp --gulpfile gulpfile.browserSync.js prod"
   },
   "keywords": [],
   "author": "",
@@ -27,7 +27,6 @@
     "gulp-less": "^4.0.1",
     "gulp-sourcemaps": "^2.6.5",
     "gulp-uglify": "^3.0.2",
-    "gulp-watchify": "^0.7.0",
     "through": "^2.3.8",
     "through2": "^3.0.1",
     "uniq": "^1.0.1",
@@ -43,5 +42,5 @@
     "url": "https://github.com/lwc2016/gulp-project/issues"
   },
   "homepage": "https://github.com/lwc2016/gulp-project#readme",
-  "description": ""
+  "description": "暂无"
 }
